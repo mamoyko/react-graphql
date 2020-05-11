@@ -20,6 +20,15 @@ const QueryRootType = new GraphQLObjectType({
                 return getAllUsers();
             },
         },
+        getenv: {
+            type: GraphQLList(UserType),
+            description: 'Get env vars',
+            resolve() {
+                return {
+                    database: process.env.DATABASE
+                }
+            },
+        }
     })
 });
 
