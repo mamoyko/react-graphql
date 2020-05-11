@@ -23,4 +23,9 @@ const UserType = new GraphQLObjectType({
     }),
 });
 
-export { UserType };
+const envType = new GraphQLObjectType({
+  database: { type: GraphQLString },
+  key: { type: GraphQLString }
+})
+
+export { UserType, envType };

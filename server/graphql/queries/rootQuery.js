@@ -7,6 +7,7 @@ import { getAllUsers } from '../../controller/user.controller';
 import Authors from '../data/authors';
 import {
     UserType,
+    envType
 } from '../types/rootTypes';
 
 const QueryRootType = new GraphQLObjectType({
@@ -21,7 +22,7 @@ const QueryRootType = new GraphQLObjectType({
             },
         },
         getenv: {
-            type: GraphQLList(UserType),
+            type: GraphQLList(envType),
             description: 'Get env vars',
             resolve() {
                 return {
