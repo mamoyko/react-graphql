@@ -3,9 +3,10 @@ import {
     GraphQLList,
     GraphQLObjectType,
 } from 'graphql';
-import { getAllUsers } from '../../controller/user.controller';
+import { getAllUsers, signInUsers } from '../../controller/user.controller';
 import {
-    UserType
+    UserType,
+    AuthType
 } from '../types/rootTypes';
 
 const QueryRootType = new GraphQLObjectType({
@@ -18,6 +19,20 @@ const QueryRootType = new GraphQLObjectType({
             resolve() {
                 return getAllUsers();
             },
+        },
+        login: {
+            type: AuthType,
+            description: 'sign in users',
+            args: {
+                username: { type: GraphQLString },
+                password: { type: GraphQLString },
+            },
+            resolve(parentValue,args){
+                return signInUsers(args).then((res) => {
+                    console.log(res)
+                    return res
+                });
+            }
         }
     })
 });

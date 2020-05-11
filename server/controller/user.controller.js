@@ -1,5 +1,6 @@
 import UserModel from '../model/user.model';
-import passport from 'passport';
+import bcrypt from 'bcrypt';
+import { getJWTFunc } from '../utils/jwt';
 
 const getAllUsers = async () => {
     const users = await UserModel.find({})
@@ -12,30 +13,17 @@ const registerUser = async (args) => {
 }
 
 const signInUsers = async (args) => {
-    passport.authenticate("local", { session: false }, (err, user, info) => {
+    const user = await UserModel.findOne({ username: args.username });
+    if (!user) {
+        throw new Error('User does not exist!');
+    }
+    const isEqual = await bcrypt.compare(args.password, user.password);
+    if (!isEqual) {
+        throw new Error('Password is incorrect!');
+    }
 
-        console.log(user)
-
-        // if (err || !user) {
-        //   return res.json({ message: info.message, result: user });
-        // }
-        // req.login(user, { session: false }, err => {
-        //   if (err) {
-        //     res.send(err);
-        //   }
-
-        //   let data = user
-        //   let token = getJWTFunc(user)
-
-        // //   let logsobj = { type : user.role, description : 'sign_in', user : req.body.id}
-        // //   let logs = await LogCtl._saveLogs(logsobj)
-
-        //   return {user, token }
-
-        // });
-
-        return {}
-      });
+    const token = await getJWTFunc(user);
+    return { userId: user._id, token: token };
 }
 
 export {

@@ -3,6 +3,7 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLInt,
+    GraphQLID
 } from 'graphql';
 
 const UserType = new GraphQLObjectType({
@@ -23,13 +24,13 @@ const UserType = new GraphQLObjectType({
     }),
 });
 
-const envType = new GraphQLObjectType({
-  name: 'Env',
-  description: 'get env vars',
+const AuthType = new GraphQLObjectType({
+  name: 'authdata',
+  description: 'authdata',
   fields: () => ({
-    database: { type: GraphQLString },
-    key: { type: GraphQLString }
+    userId: { type: GraphQLID },
+    token: { type: GraphQLString }
   })
 })
 
-export { UserType, envType };
+export { UserType, AuthType };

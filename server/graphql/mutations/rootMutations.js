@@ -10,7 +10,7 @@ import {
     signInUsers
   } from '../../controller/user.controller';
   import {
-    UserType
+    UserType    
 } from '../types/rootTypes';
 
 const QueryMutationRootType = new GraphQLObjectType({
@@ -35,17 +35,6 @@ const QueryMutationRootType = new GraphQLObjectType({
             resolve(parentValue, args) {
                 return registerUser(args);
             },
-        },
-        signIn: {
-            type: UserType,
-            description: 'sign in users',
-            args: {
-                username: { type: new GraphQLNonNull(GraphQLString) },
-                password: { type: new GraphQLNonNull(GraphQLString) },
-            },
-            resolve(parentValue, args) {
-                return signInUsers(args);
-            }
         }
     })
 });
