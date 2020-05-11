@@ -1,0 +1,18 @@
+mutation{
+    register(firstName:"John", middleName:"", lastName:"Balignasay" address: "address", email:"john@email.com", username:"superadmin",password:"superadmin",phone:"1234567",role:0){
+    _id
+    firstName
+    middleName
+    lastName
+    username
+    role
+    }
+  }
+
+
+mutation{
+  signIn(username:"superadmin", password:"superadmin"){
+    username,
+    password
+  }
+}
