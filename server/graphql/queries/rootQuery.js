@@ -25,7 +25,8 @@ const QueryRootType = new GraphQLObjectType({
             description: 'Get env vars',
             resolve() {
                 return {
-                    database: process.env.DATABASE
+                    database: process.env.DATABASE,
+                    key: process.env.SECRET_KEY
                 }
             },
         }
