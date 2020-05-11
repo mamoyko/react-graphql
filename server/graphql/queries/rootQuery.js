@@ -4,10 +4,8 @@ import {
     GraphQLObjectType,
 } from 'graphql';
 import { getAllUsers } from '../../controller/user.controller';
-import EnvVars from '../data/EnvVars';
 import {
-    UserType,
-    envType
+    UserType
 } from '../types/rootTypes';
 
 const QueryRootType = new GraphQLObjectType({
@@ -19,13 +17,6 @@ const QueryRootType = new GraphQLObjectType({
             description: 'Get all user list',
             resolve() {
                 return getAllUsers();
-            },
-        },
-        sample: {
-            type: GraphQLList(envType),
-            description: 'Get env vars',
-            resolve() {
-                return EnvVars
             },
         }
     })
