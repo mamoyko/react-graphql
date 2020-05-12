@@ -29,6 +29,13 @@ module.exports = buildSchema(`
         created: String!
     }
 
+    type AnnouncementType {
+        _id : ID!,
+        announcement: String!,
+        createdBy: ID!,
+        class:[ID!]!
+    }
+
     input RegistrationInput {
         firstName: String!,
         middleName: String!,
@@ -44,18 +51,28 @@ module.exports = buildSchema(`
     input ClassInput {
         className: String!,
         member: [ID!]!,
-        createdBy: String!,
+        createdBy: String!
+    }
+
+    input AnnouncementInput {
+        announcement: String!,
+        createdBy: ID!,
+        class:[ID!]!
     }
 
     type RootQuery {
         users: [User!]!,
         login(username: String!, password: String!): AuthData!,
         getClass: [ClassType!]!
+        announcement: [AnnouncementType!]!
+        classAnnouncement: [AnnouncementType!]!
     }
 
     type RootMutation  {
-        register(data:RegistrationInput): User
-        addClass(data:ClassInput):ClassType
+        register(data:RegistrationInput): User,
+        addClass(data:ClassInput):ClassType,
+        addAnnouncement(data:AnnouncementInput):AnnouncementType,
+        addClassAnnouncement(data:AnnouncementInput):AnnouncementType,
     }
 
     schema {

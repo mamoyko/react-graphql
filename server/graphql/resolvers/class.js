@@ -13,4 +13,4 @@ module.exports = {
         const classData = await classModel.create(args.data)
         return classData;
       }
-  }
+}
