@@ -3,10 +3,17 @@ import {
     GraphQLList,
     GraphQLObjectType,
 } from 'graphql';
-import { getAllUsers, signInUsers } from '../../controller/user.controller';
+import { 
+    getAllUsers, 
+    signInUsers 
+} from '../../controller/user.controller';
+import {
+    getAllClass
+} from '../../controller/class.controller';
 import {
     UserType,
-    AuthType
+    AuthType,
+    classType
 } from '../types/rootTypes';
 
 const QueryRootType = new GraphQLObjectType({
@@ -32,6 +39,13 @@ const QueryRootType = new GraphQLObjectType({
                     console.log(res)
                     return res
                 });
+            }
+        },
+        classData: {
+            type: GraphQLList(classType),
+            description: 'get all classes',
+            resolve(){
+                return getAllClass();
             }
         }
     })

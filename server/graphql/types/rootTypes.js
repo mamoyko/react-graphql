@@ -3,7 +3,8 @@ import {
     GraphQLObjectType,
     GraphQLNonNull,
     GraphQLInt,
-    GraphQLID
+    GraphQLID,
+    GraphQLList
 } from 'graphql';
 
 const UserType = new GraphQLObjectType({
@@ -31,6 +32,18 @@ const AuthType = new GraphQLObjectType({
     userId: { type: GraphQLID },
     token: { type: GraphQLString }
   })
+});
+
+const classType = new GraphQLObjectType({
+  name: 'classData',
+  description: 'class type',
+  fields: () => ({
+    className: { type: GraphQLID },
+    member: { type: GraphQLList(GraphQLString) },
+    created_by: {type: UserType},
+    created: { type: GraphQLString }
+  })
 })
 
-export { UserType, AuthType };
+
+export { UserType, AuthType, classType };

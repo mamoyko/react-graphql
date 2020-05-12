@@ -6,8 +6,7 @@ import {
     GraphQLInt,
 } from 'graphql';
 import {
-    registerUser,
-    signInUsers
+    registerUser
   } from '../../controller/user.controller';
   import {
     UserType    
