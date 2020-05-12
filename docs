@@ -1,18 +1,23 @@
 mutation{
-    register(firstName:"John", middleName:"", lastName:"Balignasay" address: "address", email:"john@email.com", username:"superadmin",password:"superadmin",phone:"1234567",role:0){
-    _id
-    firstName
-    middleName
-    lastName
-    username
-    role
-    }
+    register(data:{firstName:"student3", middleName:"", lastName:"student3" address: "address", email:"student3@email.com", username:"student3",password:"student3",phone:"1234567",role:0}){
+    	_id
+    	firstName
   }
+}
+
+
+query{
+  login(username:"superadmin", password:"superadmin"){
+    userId
+    token
+  }
+}
 
 
 mutation{
-  signIn(username:"superadmin", password:"superadmin"){
-    username,
-    password
+  addClass(className:"class a", member:[], createdBy:"5eb967ef07066d2f442daf64"){
+    className,
+    member,
+    createdBy
   }
 }

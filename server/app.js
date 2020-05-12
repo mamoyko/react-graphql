@@ -1,16 +1,17 @@
 import express from 'express';
 import graphqlHTTP from 'express-graphql';
-import schema from './graphql/schema';
+import graphQlSchema from './graphql/schema/index';
+import graphQlResolvers from './graphql/resolvers/index'
 
 const app = express();
 
-app.use('/', graphqlHTTP({
-  schema,
-  graphiql: true,
-}));
+app.use(
+  '/graphql',
+  graphqlHTTP({
+    schema: graphQlSchema,
+    rootValue: graphQlResolvers,
+    graphiql: true
+  })
+);
 
 export default app;
-
-// const PORT = process.env.PORT || 5000;
-
-// app.listen(PORT,() => console.log(`Listening to port ${PORT}`))

@@ -9,11 +9,16 @@ const classSchema = new mongoose.Schema({
         required: 'Please enter a classname',
     },
 
-    member: [String],
+    member: [
+        {
+            type: mongoose.Schema.Types.ObjectId, 
+            ref: "Users"
+        }
+    ],
 
-    created_by : {
+    createdBy : {
         type: mongoose.Schema.Types.ObjectId, 
-        ref: 'User'
+        ref: 'Users'
     },
     
     created: {
@@ -26,7 +31,7 @@ const classSchema = new mongoose.Schema({
 
 //define our indexes
 classSchema.index({
-    username: 'text'
+    className: 'text'
 });
 
 export default mongoose.model('Class', classSchema);
