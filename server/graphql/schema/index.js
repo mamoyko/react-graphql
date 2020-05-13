@@ -5,11 +5,11 @@ module.exports = buildSchema(`
     type User {
         _id: ID!,
         firstName: String!,
-        middleName: String!,
+        middleName: String,
         lastName: String!,
         email: String!,
         username: String!,
-        password: String!,
+        password: String,
         role: Int!,
         address: String!,
         phone: String!,
@@ -18,7 +18,7 @@ module.exports = buildSchema(`
 
     type AuthData {
         userId: ID!,
-        token: String!
+        accessToken: String!
     }
 
     type ClassType {
@@ -66,6 +66,7 @@ module.exports = buildSchema(`
         getClass: [ClassType!]!
         announcement: [AnnouncementType!]!
         classAnnouncement: [AnnouncementType!]!
+        me: User
     }
 
     type RootMutation  {

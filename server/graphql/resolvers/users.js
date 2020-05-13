@@ -21,7 +21,13 @@ module.exports = {
         throw new Error('Password is incorrect!');
       }
       const token = await getJWTFunc(user);
-      return { userId: user._id, token: token };
+      return { userId: user._id, accessToken: token };
+    },
+    me: async (args,req) => {
+      if (!req.isAuth){
+        throw new Error('Unauthenticated!');
+      }
+      return req.user;
     },
     register: async (args) => {
       const user = await UserModel.create(args.data);
